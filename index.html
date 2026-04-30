@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduHub - Acasă</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center h-20">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-book-open"></i></div>
+                <span class="logo-text">EduHub<span>.</span></span>
+            </div>
+            
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">Acasă</a>
+                <a href="cursuri.html" class="nav-link">Cursuri</a>
+                <a href="joc.html" class="nav-link">Joc</a>
+                <a href="comunitate.html" class="nav-link">Comunitate</a>
+            </div>
+
+            <div class="user-stats">
+                <div class="xp-info">
+                    <span class="level-label">Nivel 12</span>
+                    <span class="xp-amount">1,250 XP</span>
+                </div>
+                <button class="btn-account">Contul Meu</button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-section">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="hero-text">
+                <span class="badge">Portal Oficial Școlar</span>
+                <h1>Găsește tot ce ai nevoie pentru <span class="highlight">succesul tău.</span></h1>
+                
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Caută orar, cursuri, profesori...">
+                    <button>Caută</button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-shape s1"><i class="fas fa-atom"></i></div>
+                <div class="hero-card">
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=600" alt="Elev">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="info-card">
+                <h3>Programul Zilei</h3>
+                <div class="schedule-item active">
+                    <span class="time">09:00</span>
+                    <span class="subject">Informatică</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="time">10:00</span>
+                    <span class="subject">Matematică</span>
+                </div>
+            </div>
+            <!-- Mai multe secțiuni aici conform imaginii -->
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
