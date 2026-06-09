@@ -1,77 +1,2004 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="ro" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduHub - Acasă</title>
+    <title>EduHub - Asistentul Tău Școlar Inteligent</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts: Inter pentru lizibilitate și Fredoka pentru un stil prietenos școlăresc -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome pentru pictograme -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        friendly: ['Fredoka', 'sans-serif'],
+                    },
+                    animation: {
+                        'bounce-slow': 'bounce 3s infinite',
+                        'pulse-slow': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Tema principală bazată exact pe paleta ta de culori */
+        .theme-pastel {
+            --bg-primary: #F3F4F6; /* Gri deschis */
+            --bg-card: #FFFFFF; /* Alb */
+            --text-main: #1E3A8A; /* Albastru */
+            --text-muted: #4B5563; /* Gri închis pentru lizibilitate */
+            --accent: #1E3A8A; /* Albastru */
+            --accent-hover: #1e40af; /* Albastru hover */
+            --accent-light: #E0E7FF; /* Albastru deschis */
+            --border-color: #E5E7EB; /* Gri deschis pentru granițe */
+            --glow: rgba(30, 58, 138, 0.15);
+            --success: #22C55E; /* Verde */
+        }
+        
+        .theme-cosmic {
+            --bg-primary: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #22C55E; /* Accentul devine Verde */
+            --accent-hover: #16a34a;
+            --accent-light: #14532d;
+            --border-color: #334155;
+            --glow: rgba(34, 197, 94, 0.2);
+        }
+
+        .theme-forest {
+            --bg-primary: #F3F4F6;
+            --bg-card: #FFFFFF;
+            --text-main: #14361e;
+            --text-muted: #526e5a;
+            --accent: #22C55E; /* Verde dominant */
+            --accent-hover: #16a34a;
+            --accent-light: #d1fae5;
+            --border-color: #d1e2d6;
+            --glow: rgba(34, 197, 94, 0.15);
+        }
+
+        .theme-cyber {
+            --bg-primary: #0b0f19;
+            --bg-card: #121826;
+            --text-main: #FFFFFF;
+            --text-muted: #849ab8;
+            --accent: #1E3A8A; /* Albastru dominant */
+            --accent-hover: #1e40af;
+            --accent-light: #172554;
+            --border-color: #1e293b;
+            --glow: rgba(30, 58, 138, 0.3);
+        }
+
+        /* Aplicarea variabilelor CSS */
+        .custom-bg { background-color: var(--bg-primary); }
+        .custom-card { background-color: var(--bg-card); border-color: var(--border-color); }
+        .custom-text { color: var(--text-main); }
+        .custom-text-muted { color: var(--text-muted); }
+        .custom-accent-btn { background-color: var(--accent); color: white; }
+        .custom-accent-btn:hover { background-color: var(--accent-hover); }
+        .custom-border { border-color: var(--border-color); }
+        .custom-accent-text { color: var(--accent); }
+        .custom-accent-light-bg { background-color: var(--accent-light); }
+
+        /* Efect de flip pentru Flashcards */
+        .flashcard-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .flashcard-flipped {
+            transform: rotateY(180deg);
+        }
+        .flashcard-front, .flashcard-back {
+            backface-visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .flashcard-back {
+            transform: rotateY(180deg);
+        }
+
+        /* Personalizare scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--text-muted);
+            border-radius: 10px;
+            opacity: 0.3;
+        }
+    </style>
 </head>
-<body>
+<body class="theme-pastel custom-bg custom-text min-h-screen flex flex-col transition-colors duration-300">
 
-    <nav class="navbar">
-        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center h-20">
-            <div class="logo">
-                <div class="logo-icon"><i class="fas fa-book-open"></i></div>
-                <span class="logo-text">EduHub<span>.</span></span>
-            </div>
-            
-            <div class="nav-links">
-                <a href="index.html" class="nav-link active">Acasă</a>
-                <a href="cursuri.html" class="nav-link">Cursuri</a>
-                <a href="joc.html" class="nav-link">Joc</a>
-                <a href="comunitate.html" class="nav-link">Comunitate</a>
-            </div>
-
-            <div class="user-stats">
-                <div class="xp-info">
-                    <span class="level-label">Nivel 12</span>
-                    <span class="xp-amount">1,250 XP</span>
+    <div class="flex flex-col md:flex-row min-h-screen w-full relative">
+        
+        <!-- Sidebar Stânga pentru Desktop (Ascuns pe Mobil, înlocuit de un Bottom Nav) -->
+        <aside class="hidden md:flex flex-col w-64 custom-card border-r p-5 shrink-0 justify-between h-screen sticky top-0">
+            <div>
+                <!-- Logo & Nume Brand -->
+                <div class="flex items-center gap-3 mb-8 cursor-pointer" onclick="switchTab('dashboard')">
+                    <div class="w-10 h-10 rounded-xl custom-accent-btn flex items-center justify-center text-xl shadow-md shadow-[var(--glow)]">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-friendly font-bold text-xl tracking-wide custom-accent-text">EduHub</h1>
+                        <p class="text-xs custom-text-muted">Partenerul tău de studiu</p>
+                    </div>
                 </div>
-                <button class="btn-account">Contul Meu</button>
+
+                <!-- Navigație Linkuri -->
+                <nav class="space-y-2">
+                    <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition duration-200 font-medium text-sm active-nav custom-accent-light-bg custom-accent-text">
+                        <i class="fa-solid fa-house text-lg"></i>
+                        <span>Acasă</span>
+                    </button>
+                    <button onclick="switchTab('schedule')" id="nav-schedule" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition duration-200 font-medium text-sm custom-text-muted hover:bg-slate-100 dark:hover:bg-slate-800">
+                        <i class="fa-solid fa-calendar-days text-lg"></i>
+                        <span>Orarul Meu</span>
+                    </button>
+                    <button onclick="switchTab('homework')" id="nav-homework" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition duration-200 font-medium text-sm custom-text-muted hover:bg-slate-100 dark:hover:bg-slate-800">
+                        <i class="fa-solid fa-book-bookmark text-lg"></i>
+                        <span>Teme & Task-uri</span>
+                    </button>
+                    <button onclick="switchTab('notes')" id="nav-notes" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition duration-200 font-medium text-sm custom-text-muted hover:bg-slate-100 dark:hover:bg-slate-800">
+                        <i class="fa-solid fa-note-sticky text-lg"></i>
+                        <span>Notițe Inteligente</span>
+                    </button>
+                    <button onclick="switchTab('study')" id="nav-study" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition duration-200 font-medium text-sm custom-text-muted hover:bg-slate-100 dark:hover:bg-slate-800">
+                        <i class="fa-solid fa-brain text-lg"></i>
+                        <span>Unelte de Studiu</span>
+                    </button>
+                    <button onclick="switchTab('break')" id="nav-break" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition duration-200 font-medium text-sm custom-text-muted hover:bg-slate-100 dark:hover:bg-slate-800">
+                        <i class="fa-solid fa-gamepad text-lg"></i>
+                        <span>Pauza Activă</span>
+                    </button>
+                </nav>
             </div>
-        </div>
+
+            <!-- Modificator de Temă & Profil Rapid -->
+        <div class="pt-5 border-t custom-border">
+            <p class="text-xs font-semibold custom-text-muted mb-3 uppercase tracking-wider">Alege Tema Vizuală</p>
+            <div class="grid grid-cols-4 gap-2 mb-4">
+                <!-- Butonul de temă principală folosind culorile tale -->
+                <button onclick="changeTheme('pastel')" title="Tema EduHub (Albastru & Verde)" class="w-8 h-8 rounded-full bg-[#FFFFFF] border-2 border-[#1E3A8A] hover:scale-110 transition shadow-sm relative flex items-center justify-center">
+                    <span class="w-3 h-3 rounded-full bg-[#22C55E]"></span>
+                </button>
+                <button onclick="changeTheme('cosmic')" title="Cosmic Verde" class="w-8 h-8 rounded-full bg-slate-900 border-2 border-[#22C55E] hover:scale-110 transition shadow-sm"></button>
+                <button onclick="changeTheme('forest')" title="Pădure Eco" class="w-8 h-8 rounded-full bg-emerald-50 border-2 border-[#22C55E] hover:scale-110 transition shadow-sm"></button>
+                <button onclick="changeTheme('cyber')" title="Albastru Nocturn" class="w-8 h-8 rounded-full bg-black border-2 border-[#1E3A8A] hover:scale-110 transition shadow-sm"></button>
+            </div>
+            <div class="flex items-center gap-3 p-2 rounded-lg bg-slate-100/50 dark:bg-slate-800/50">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-orange-400 to-amber-500 flex items-center justify-center text-white text-sm font-bold">
+                        S
+                    </div>
+                    <div class="overflow-hidden">
+                        <p class="text-xs font-bold truncate">Elev Silitor</p>
+                        <p class="text-[10px] custom-text-muted truncate">Clasa a VIII-a A</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Conținut Principal -->
+        <main class="flex-1 flex flex-col min-h-screen pb-20 md:pb-0 overflow-y-auto">
+            
+            <!-- Header Superior cu Motorul de Căutare Global și Utilul Zilei -->
+            <header class="custom-card border-b p-4 md:px-8 flex flex-col sm:flex-row gap-4 justify-between items-center sticky top-0 z-10 shadow-sm backdrop-blur-md bg-opacity-90">
+                <!-- Zona de Căutare Smart -->
+                <div class="relative w-full sm:w-96">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                    <input type="text" id="global-search" oninput="handleGlobalSearch()" placeholder="Caută orar, teme, notițe sau carduri..." 
+                        class="w-full pl-10 pr-4 py-2 rounded-xl border custom-border bg-slate-50/50 dark:bg-slate-900/50 focus:outline-none focus:ring-2 focus:ring-[var(--accent)] text-sm">
+                    <!-- Drawer Rezultate Căutare -->
+                    <div id="search-results-drawer" class="hidden absolute left-0 right-0 mt-2 p-3 rounded-xl shadow-xl border custom-card max-h-80 overflow-y-auto z-50">
+                        <div class="flex justify-between items-center mb-2 pb-2 border-b custom-border">
+                            <span class="text-xs font-bold uppercase tracking-wider custom-accent-text">Rezultate Căutare</span>
+                            <button onclick="closeSearch()" class="text-xs custom-text-muted hover:text-red-500">Închide <i class="fa-solid fa-xmark"></i></button>
+                        </div>
+                        <div id="search-results-content" class="space-y-2"></div>
+                    </div>
+                </div>
+
+                <!-- Info Rapid + Meniu Mobil Theme -->
+            <div class="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end">
+                <!-- Widget Ceas digital școlăresc -->
+                <div class="text-right hidden lg:block">
+                    <p id="digital-clock" class="text-sm font-bold custom-accent-text"></p>
+                    <p id="current-school-week" class="text-[10px] custom-text-muted uppercase tracking-wider"></p>
+                </div>
+
+                <!-- Selector rapid temă pentru mobile folosind paleta ta -->
+                <div class="flex items-center gap-2 md:hidden">
+                    <button onclick="changeTheme('pastel')" class="w-6 h-6 rounded-full bg-[#FFFFFF] border border-[#1E3A8A] flex items-center justify-center"><span class="w-2 h-2 rounded-full bg-[#22C55E]"></span></button>
+                    <button onclick="changeTheme('cosmic')" class="w-6 h-6 rounded-full bg-slate-900 border border-[#22C55E]"></button>
+                    <button onclick="changeTheme('forest')" class="w-6 h-6 rounded-full bg-emerald-50 border border-[#22C55E]"></button>
+                    <button onclick="changeTheme('cyber')" class="w-6 h-6 rounded-full bg-black border border-[#1E3A8A]"></button>
+                </div>
+
+                <!-- Buton Profil / Setări Mobile -->
+                    <div class="flex items-center gap-2">
+                        <span id="header-motivational-pill" class="text-xs px-3 py-1.5 rounded-full custom-accent-light-bg custom-accent-text font-medium hidden sm:inline-block">
+                            📚 Zi productivă!
+                        </span>
+                        <div class="md:hidden w-8 h-8 rounded-xl custom-accent-btn flex items-center justify-center" onclick="toggleMobileMenu()">
+                            <i class="fa-solid fa-bars"></i>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div id="app-notification" class="fixed top-5 right-5 z-50 transform translate-x-80 opacity-0 transition-all duration-300 pointer-events-none">
+                <div class="bg-slate-900 text-white dark:bg-white dark:text-slate-900 px-4 py-3 rounded-xl shadow-lg flex items-center gap-3">
+                    <span id="notif-icon" class="text-emerald-400"><i class="fa-solid fa-circle-check"></i></span>
+                    <span id="notif-message" class="text-sm font-semibold">Salvat cu succes!</span>
+                </div>
+            </div>
+
+            <!-- SPA CONTAINER (Secțiunile de conținut) -->
+            <div id="workspace-content" class="flex-1 p-4 md:p-8 max-w-7xl w-full mx-auto">
+                
+                <!-- 1. SECȚIUNEA DASHBOARD (ACASĂ) -->
+                <section id="view-dashboard" class="space-y-6">
+                    <!-- Banner de Bun Venit -->
+                    <div class="rounded-2xl bg-gradient-to-r from-[#1E3A8A] to-[#22C55E] p-6 md:p-8 text-white relative overflow-hidden shadow-lg">
+                        <div class="relative z-10 max-w-md">
+                            <h2 class="font-friendly font-bold text-2xl md:text-3xl mb-2">Salut, Elev Silitor! 👋</h2>
+                            <p class="text-sm text-blue-50 mb-4">Gata pentru o nouă zi de cunoaștere? Toate instrumentele tale sunt organizate perfect aici.</p>
+                            <div class="flex gap-2">
+                                <button onclick="switchTab('homework')" class="bg-white text-[#1E3A8A] hover:bg-slate-100 px-4 py-2 rounded-xl text-xs font-bold shadow transition">Vezi Teme</button>
+                                <button onclick="switchTab('study')" class="bg-white/10 hover:bg-white/20 border border-white/20 text-white px-4 py-2 rounded-xl text-xs font-bold shadow transition">Pornește Pomodoro</button>
+                            </div>
+                        </div>
+                        <!-- Globuleț decorativ -->
+                        <div class="absolute -right-10 -bottom-10 w-44 h-44 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+                        <div class="absolute right-10 top-5 text-7xl opacity-20 pointer-events-none animate-bounce-slow">
+                            <i class="fa-solid fa-rocket"></i>
+                        </div>
+                    </div>
+
+                    <!-- Secțiunea de statistici rapide -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div onclick="switchTab('homework')" class="custom-card border p-4 rounded-2xl flex items-center gap-4 shadow-sm cursor-pointer hover:scale-[1.02] hover:shadow-md transition duration-200">
+                            <div class="w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-950/40 text-amber-600 flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-clock-rotate-left"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xs custom-text-muted font-bold uppercase">Teme active</h3>
+                                <p id="dash-active-homeworks-count" class="text-xl font-bold">0 de făcut</p>
+                            </div>
+                        </div>
+                        <div onclick="switchTab('notes')" class="custom-card border p-4 rounded-2xl flex items-center gap-4 shadow-sm cursor-pointer hover:scale-[1.02] hover:shadow-md transition duration-200">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-950/40 text-emerald-600 flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-square-poll-vertical"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xs custom-text-muted font-bold uppercase">Notițe Salvate</h3>
+                                <p id="dash-notes-count" class="text-xl font-bold">0 notițe</p>
+                            </div>
+                        </div>
+                        <div onclick="switchTab('break')" class="custom-card border p-4 rounded-2xl flex items-center gap-4 shadow-sm cursor-pointer hover:scale-[1.02] hover:shadow-md transition duration-200">
+                            <div class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-950/40 text-[#1E3A8A] flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-trophy"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xs custom-text-muted font-bold uppercase">Scor Joc Matematic</h3>
+                                <p id="dash-game-score" class="text-xl font-bold">0 Puncte</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Divizare Dashboard -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Coloana Stângă - Orarul de Azi și Citatul Motivațional -->
+                        <div class="lg:col-span-2 space-y-6">
+                            <!-- Orarul de azi -->
+                            <div class="custom-card border p-5 rounded-2xl shadow-sm">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h3 class="font-friendly font-bold text-lg flex items-center gap-2">
+                                        <i class="fa-solid fa-calendar-day custom-accent-text"></i> Orele de Astăzi
+                                    </h3>
+                                    <button onclick="switchTab('schedule')" class="text-xs custom-accent-text font-bold hover:underline">Editează Orarul</button>
+                                </div>
+                                <div id="dashboard-today-schedule" class="space-y-3">
+                                    <!-- Se încarcă dinamic -->
+                                </div>
+                            </div>
+
+                            <!-- Citatul Motivațional -->
+                            <div class="custom-card border p-5 rounded-2xl bg-gradient-to-br from-[#E0E7FF]/30 to-[#d1fae5]/30 dark:from-slate-900/40 dark:to-emerald-950/20 shadow-sm relative overflow-hidden">
+                                <p class="text-xs custom-text-muted uppercase tracking-wider font-bold mb-2">💡 Sfatul Zilei</p>
+                                <blockquote class="italic font-medium text-base mb-2" id="motivational-quote">
+                                    "Educația este cea mai puternică armă pe care o poți folosi pentru a schimba lumea."
+                                </blockquote>
+                                <cite class="text-xs font-bold text-right block custom-accent-text" id="motivational-author">- Nelson Mandela</cite>
+                            </div>
+                        </div>
+
+                        <!-- Coloana Dreaptă - Teme Urgente + Widget Pomodoro rapid -->
+                        <div class="space-y-6">
+                            <!-- Teme Urgente -->
+                            <div class="custom-card border p-5 rounded-2xl shadow-sm">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h3 class="font-friendly font-bold text-lg flex items-center gap-2">
+                                        <i class="fa-solid fa-circle-exclamation text-amber-500"></i> Termene Limită Urgente
+                                    </h3>
+                                    <button onclick="switchTab('homework')" class="text-xs custom-text-muted font-bold hover:underline">Toate temele</button>
+                                </div>
+                                <div id="dashboard-urgent-homeworks" class="space-y-3">
+                                    <!-- Se încarcă dinamic -->
+                                </div>
+                            </div>
+
+                            <!-- Widget Quick Pomodoro -->
+                            <div class="custom-card border p-5 rounded-2xl text-center bg-gradient-to-b from-slate-50 to-blue-50/20 dark:from-slate-900/50 dark:to-blue-950/20 shadow-sm">
+                                <h3 class="font-friendly font-bold text-md mb-2">⏰ Concentrează-te rapid</h3>
+                                <p class="text-xs custom-text-muted mb-4">Învață eficient folosind tehnica Pomodoro. 25 de minute de concentrare intensă.</p>
+                                <button onclick="switchTab('study'); startPomodoroDirectly();" class="custom-accent-btn px-4 py-2 rounded-xl text-xs font-bold w-full flex items-center justify-center gap-2 shadow transition">
+                                    <i class="fa-solid fa-play"></i> Începe Sesiunea
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="view-schedule" class="space-y-6 hidden">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div>
+                            <h2 class="font-friendly font-bold text-2xl custom-accent-text">Orarul Meu Școlar</h2>
+                            <p class="text-sm custom-text-muted">Gestionează-ți orele săptămânale și sălile de curs.</p>
+                        </div>
+                        <button onclick="openAddScheduleModal()" class="custom-accent-btn px-4 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 shadow transition">
+                            <i class="fa-solid fa-plus"></i> Adaugă Oră nouă
+                        </button>
+                    </div>
+
+                    <!-- Tab-uri pentru Zilele Săptămânii -->
+                    <div class="flex overflow-x-auto gap-2 pb-2 scrollbar-none">
+                        <button onclick="filterScheduleDay('Luni')" class="schedule-day-tab px-4 py-2 rounded-xl text-sm font-bold border transition shrink-0 active-day-tab bg-indigo-600 text-white" id="tab-day-Luni">Luni</button>
+                        <button onclick="filterScheduleDay('Marți')" class="schedule-day-tab px-4 py-2 rounded-xl text-sm font-bold border transition shrink-0 custom-card custom-text-muted" id="tab-day-Marți">Marți</button>
+                        <button onclick="filterScheduleDay('Miercuri')" class="schedule-day-tab px-4 py-2 rounded-xl text-sm font-bold border transition shrink-0 custom-card custom-text-muted" id="tab-day-Miercuri">Miercuri</button>
+                        <button onclick="filterScheduleDay('Joi')" class="schedule-day-tab px-4 py-2 rounded-xl text-sm font-bold border transition shrink-0 custom-card custom-text-muted" id="tab-day-Joi">Joi</button>
+                        <button onclick="filterScheduleDay('Vineri')" class="schedule-day-tab px-4 py-2 rounded-xl text-sm font-bold border transition shrink-0 custom-card custom-text-muted" id="tab-day-Vineri">Vineri</button>
+                    </div>
+
+                    <!-- Afișare Orar Săptămânal -->
+                    <div class="custom-card border rounded-2xl p-5 shadow-sm">
+                        <div id="schedule-timeline-container" class="space-y-4">
+                            <!-- Se va popula dinamic cu orele zilei selectate -->
+                        </div>
+                    </div>
+                </section>
+
+                <section id="view-homework" class="space-y-6 hidden">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div>
+                            <h2 class="font-friendly font-bold text-2xl custom-accent-text">Teme și Activități</h2>
+                            <p class="text-sm custom-text-muted">Ține evidența proiectelor și a temelor de acasă pentru a nu uita nimic.</p>
+                        </div>
+                        <button onclick="openAddHomeworkModal()" class="custom-accent-btn px-4 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 shadow transition">
+                            <i class="fa-solid fa-plus"></i> Creează Temă Nouă
+                        </button>
+                    </div>
+
+                    <!-- Filter Bar pentru teme -->
+                    <div class="flex gap-4 border-b custom-border pb-3">
+                        <button onclick="filterHomeworks('toate')" class="hw-filter-btn text-sm font-bold custom-accent-text border-b-2 border-[var(--accent)] pb-3" id="hw-filter-toate">Toate</button>
+                        <button onclick="filterHomeworks('active')" class="hw-filter-btn text-sm font-bold custom-text-muted pb-3" id="hw-filter-active">În curs</button>
+                        <button onclick="filterHomeworks('completate')" class="hw-filter-btn text-sm font-bold custom-text-muted pb-3" id="hw-filter-completate">Finalizate</button>
+                    </div>
+
+                    <!-- Gridul de Teme -->
+                    <div id="homeworks-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Instanțele de temă vor fi inserate dinamic -->
+                    </div>
+                </section>
+
+                <section id="view-notes" class="space-y-6 hidden">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div>
+                            <h2 class="font-friendly font-bold text-2xl custom-accent-text">Caietul Tău Digital</h2>
+                            <p class="text-sm custom-text-muted">Ia notițe rapide la cursuri sau planifică-ți eseurile.</p>
+                        </div>
+                        <button onclick="openAddNoteModal()" class="custom-accent-btn px-4 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 shadow transition">
+                            <i class="fa-solid fa-plus"></i> Scrie o Notiță
+                        </button>
+                    </div>
+
+                    <!-- Selector categorii de materii -->
+                    <div class="flex gap-2 overflow-x-auto pb-2" id="notes-subjects-filter">
+                        <!-- Filtrul pe materii populat dinamic -->
+                    </div>
+
+                    <!-- Gridul de Notițe -->
+                    <div id="notes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Instanțele de notițe vor fi adăugate dinamic -->
+                    </div>
+                </section>
+
+                <section id="view-study" class="space-y-6 hidden">
+                    <div>
+                        <h2 class="font-friendly font-bold text-2xl custom-accent-text">Instrumente pentru Succes</h2>
+                        <p class="text-sm custom-text-muted">Metode dovedite științific care te ajută să reții mult mai rapid.</p>
+                    </div>
+
+                    <!-- Tab sub-instrumente -->
+                    <div class="grid grid-cols-3 gap-2 p-1 bg-slate-100 dark:bg-slate-800 rounded-2xl">
+                        <button onclick="switchStudySubTab('pomodoro')" id="btn-sub-pomodoro" class="py-2.5 text-xs sm:text-sm font-bold rounded-xl transition bg-white dark:bg-slate-700 shadow-sm">Pomodoro</button>
+                        <button onclick="switchStudySubTab('flashcards')" id="btn-sub-flashcards" class="py-2.5 text-xs sm:text-sm font-bold rounded-xl transition custom-text-muted">Carduri Memorie</button>
+                        <button onclick="switchStudySubTab('calculator')" id="btn-sub-calculator" class="py-2.5 text-xs sm:text-sm font-bold rounded-xl transition custom-text-muted">Unelte & Calculator</button>
+                    </div>
+
+                    <!-- SUB-TAB: POMODORO -->
+                    <div id="sub-view-pomodoro" class="space-y-6">
+                        <div class="custom-card border p-8 rounded-3xl text-center max-w-md mx-auto shadow-md relative overflow-hidden">
+                            <div class="relative z-10">
+                                <h3 class="font-friendly font-bold text-xl mb-1">Concentrare Pomodoro</h3>
+                                <p id="pomodoro-state-label" class="text-xs custom-text-muted uppercase tracking-widest font-bold mb-6">Pregătit de Studiu 📖</p>
+                                
+                                <!-- Cronometru vizual radial sau digital de impact -->
+                                <div class="w-48 h-48 rounded-full border-4 border-dashed border-[var(--accent)] flex flex-col justify-center items-center mx-auto mb-6 relative animate-pulse-slow">
+                                    <span id="pomodoro-time-display" class="font-friendly text-5xl font-bold">25:00</span>
+                                    <span class="text-[10px] custom-text-muted uppercase tracking-widest mt-1">minute</span>
+                                </div>
+
+                                <div class="flex justify-center gap-3">
+                                    <button onclick="togglePomodoroTimer()" id="btn-pomodoro-start" class="custom-accent-btn px-6 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 shadow">
+                                        <i class="fa-solid fa-play"></i> Start
+                                    </button>
+                                    <button onclick="resetPomodoroTimer()" class="bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 px-6 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 transition">
+                                        <i class="fa-solid fa-rotate-left"></i> Reset
+                                    </button>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-2 mt-6 pt-6 border-t custom-border text-left">
+                                    <div>
+                                        <label class="text-[10px] uppercase font-bold custom-text-muted">Durată Studiu (Min)</label>
+                                        <input type="number" id="input-pomo-focus" value="25" min="1" max="60" onchange="updatePomoSettings()" class="w-full px-3 py-1.5 mt-1 rounded-xl border custom-border bg-transparent text-sm">
+                                    </div>
+                                    <div>
+                                        <label class="text-[10px] uppercase font-bold custom-text-muted">Pauză (Min)</label>
+                                        <input type="number" id="input-pomo-break" value="5" min="1" max="30" onchange="updatePomoSettings()" class="w-full px-3 py-1.5 mt-1 rounded-xl border custom-border bg-transparent text-sm">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SUB-TAB: FLASHCARDS -->
+                    <div id="sub-view-flashcards" class="space-y-6 hidden">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                            <div>
+                                <h4 class="font-friendly font-bold text-lg">Seturi de Carduri Active</h4>
+                                <p class="text-xs custom-text-muted">Apasă pe card pentru a vedea răspunsul, iar apoi navighează prin ele.</p>
+                            </div>
+                            <button onclick="openAddFlashcardModal()" class="custom-accent-btn px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 shadow">
+                                <i class="fa-solid fa-plus"></i> Adaugă Card
+                            </button>
+                        </div>
+
+                        <!-- Zona de joc a Flashcardului -->
+                        <div id="flashcards-game-area" class="max-w-md mx-auto relative hidden">
+                            <!-- Flashcard Container cu 3D perspective -->
+                            <div class="w-full h-64 cursor-pointer relative" style="perspective: 1000px;" onclick="flipCurrentFlashcard()">
+                                <div id="flashcard-element" class="flashcard-inner w-full h-full relative duration-500 transform-gpu">
+                                    <!-- Partea din față -->
+                                    <div class="flashcard-front custom-card border p-8 rounded-2xl flex flex-col justify-between items-center text-center shadow-lg">
+                                        <span class="text-xs font-bold uppercase tracking-wider custom-accent-text">ÎNTREBARE / TERMEN</span>
+                                        <p id="flashcard-q-text" class="text-lg font-bold my-auto">Ce este fotosinteza?</p>
+                                        <span class="text-[10px] custom-text-muted italic">Click pentru întoarcere <i class="fa-solid fa-rotate"></i></span>
+                                    </div>
+                                    <!-- Partea din spate -->
+                                    <div class="flashcard-back bg-gradient-to-br from-indigo-500 to-purple-600 text-white p-8 rounded-2xl flex flex-col justify-between items-center text-center shadow-lg">
+                                        <span class="text-xs font-bold uppercase tracking-wider opacity-85 text-indigo-100">EXPLICAȚIE / RĂSPUNS</span>
+                                        <p id="flashcard-a-text" class="text-base font-semibold my-auto">Procesul prin care plantele transformă dioxidul de carbon și apa în oxigen și glucoză folosind lumina soarelui.</p>
+                                        <span class="text-[10px] text-indigo-200 italic">Click pentru a vedea din nou întrebarea <i class="fa-solid fa-rotate"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Controale flashcards -->
+                            <div class="flex justify-between items-center mt-4">
+                                <button onclick="prevFlashcard()" class="p-2 rounded-xl border custom-card hover:bg-slate-100 dark:hover:bg-slate-800 transition"><i class="fa-solid fa-arrow-left"></i> Anterior</button>
+                                <span id="flashcard-counter" class="text-xs font-bold custom-text-muted">1 din 5</span>
+                                <button onclick="nextFlashcard()" class="p-2 rounded-xl border custom-card hover:bg-slate-100 dark:hover:bg-slate-800 transition">Următor <i class="fa-solid fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+
+                        <div id="flashcards-empty-state" class="text-center p-8 border border-dashed custom-border rounded-2xl">
+                            <p class="custom-text-muted text-sm mb-3">Nu ai adăugat încă niciun card de memorie.</p>
+                            <button onclick="openAddFlashcardModal()" class="custom-accent-btn px-4 py-2 rounded-xl text-xs font-bold">Adaugă primul tău card</button>
+                        </div>
+                    </div>
+
+                    <!-- SUB-TAB: CALCULATOR & CONVERTOARE -->
+                    <div id="sub-view-calculator" class="grid grid-cols-1 md:grid-cols-2 gap-6 hidden">
+                        <!-- Convertor Unități -->
+                        <div class="custom-card border p-5 rounded-2xl shadow-sm space-y-4">
+                            <h4 class="font-friendly font-bold text-md flex items-center gap-2"><i class="fa-solid fa-scale-balanced custom-accent-text"></i> Convertor Școlar de Unități</h4>
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="text-[10px] uppercase font-bold custom-text-muted">Valoare de plecare</label>
+                                    <input type="number" id="input-conv-val" value="1" oninput="runUnitConversion()" class="w-full px-3 py-2 mt-1 rounded-xl border custom-border bg-transparent text-sm">
+                                </div>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div>
+                                        <label class="text-[10px] uppercase font-bold custom-text-muted">Din</label>
+                                        <select id="select-conv-from" onchange="runUnitConversion()" class="w-full px-3 py-2 mt-1 rounded-xl border custom-border bg-white dark:bg-slate-800 text-sm">
+                                            <option value="m">Metri (m)</option>
+                                            <option value="km">Kilometri (km)</option>
+                                            <option value="cm">Centimetri (cm)</option>
+                                            <option value="kg">Kilograme (kg)</option>
+                                            <option value="g">Grame (g)</option>
+                                            <option value="l">Litri (L)</option>
+                                            <option value="ml">Mililitri (mL)</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="text-[10px] uppercase font-bold custom-text-muted">În</label>
+                                        <select id="select-conv-to" onchange="runUnitConversion()" class="w-full px-3 py-2 mt-1 rounded-xl border custom-border bg-white dark:bg-slate-800 text-sm">
+                                            <option value="cm">Centimetri (cm)</option>
+                                            <option value="m">Metri (m)</option>
+                                            <option value="km">Kilometri (km)</option>
+                                            <option value="g">Grame (g)</option>
+                                            <option value="kg">Kilograme (kg)</option>
+                                            <option value="ml">Mililitri (mL)</option>
+                                            <option value="l">Litri (L)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="bg-indigo-50/50 dark:bg-slate-900/40 p-3 rounded-xl border custom-border text-center">
+                                    <p class="text-[10px] custom-text-muted uppercase tracking-widest font-bold">Rezultat final</p>
+                                    <p id="conversion-result" class="text-lg font-bold mt-1">100 Centimetri (cm)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Calculator Matematic Simplu -->
+                        <div class="custom-card border p-5 rounded-2xl shadow-sm space-y-4">
+                            <h4 class="font-friendly font-bold text-md flex items-center gap-2"><i class="fa-solid fa-calculator custom-accent-text"></i> Calculator Rapid</h4>
+                            <div class="space-y-2">
+                                <input type="text" id="calc-screen" readonly class="w-full text-right p-3 bg-slate-50 dark:bg-slate-900 rounded-xl border custom-border text-lg font-bold" placeholder="0">
+                                <div class="grid grid-cols-4 gap-2 text-sm font-bold">
+                                    <button onclick="pressCalc('C')" class="p-2.5 rounded-xl bg-rose-100 hover:bg-rose-200 text-rose-600 transition">C</button>
+                                    <button onclick="pressCalc('(')" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:scale-105 transition">(</button>
+                                    <button onclick="pressCalc(')')" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:scale-105 transition">)</button>
+                                    <button onclick="pressCalc('/')" class="p-2.5 rounded-xl bg-amber-100 text-amber-600 hover:scale-105 transition">/</button>
+
+                                    <button onclick="pressCalc('7')" class="p-2.5 rounded-xl border custom-card hover:scale-105 transition">7</button>
+                                    <button onclick="pressCalc('8')" class="p-2.5 rounded-xl border custom-card hover:scale-105 transition">8</button>
+                                    <button onclick="pressCalc('9')" class="p-2.5 rounded-xl border custom-card hover:scale-105 transition">9</button>
+                                    <button onclick="pressCalc('*')" class="p-2.5 rounded-xl bg-amber-100 text-amber-600 hover:scale-105 transition">*</button>
+
+                                    <button onclick="pressCalc('4')" class="p-2.5 rounded-xl border custom-card hover:scale-105 transition">4</button>
+                                    <button onclick="pressCalc('5')" class="p-2.5 rounded-xl border custom-card hover:scale-105 transition">5</button>
+                                    <button onclick="pressCalc('6')" class="p-2.5 rounded-xl border custom-card hover:scale-105 transition">6</button>
+                                    <button onclick="pressCalc('-')" class="p-2.5 rounded-xl bg-amber-100 text-amber-600 hover:scale-105 transition">-</button>
+
+                                    <button onclick="pressCalc('1')" class="p-2.5 rounded-xl border custom-card hover:scale-105 transition">1</button>
+                                    <button onclick="pressCalc('2')" class="p-2.5 rounded-xl border custom-card hover:scale-105 transition">2</button>
+                                    <button onclick="pressCalc('3')" class="p-2.5 rounded-xl border custom-card hover:scale-105 transition">3</button>
+                                    <button onclick="pressCalc('+')" class="p-2.5 rounded-xl bg-amber-100 text-amber-600 hover:scale-105 transition">+</button>
+
+                                    <button onclick="pressCalc('0')" class="col-span-2 p-2.5 rounded-xl border custom-card hover:scale-105 transition">0</button>
+                                    <button onclick="pressCalc('.')" class="p-2.5 rounded-xl border custom-card hover:scale-105 transition">.</button>
+                                    <button onclick="pressCalc('=')" class="p-2.5 rounded-xl bg-emerald-500 text-white hover:scale-105 transition">=</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="view-break" class="space-y-6 hidden">
+                    <div class="text-center max-w-lg mx-auto space-y-4">
+                        <h2 class="font-friendly font-bold text-3xl custom-accent-text">🎮 Antrenament Mental Contra Cronometru</h2>
+                        <p class="text-sm custom-text-muted">Un joc distractiv care îți dezvoltă viteza de calcul în pauza școlară. Răspunde la cât mai multe operații în 30 de secunde!</p>
+                        
+                        <!-- Panoul de Joc -->
+                        <div class="custom-card border p-6 rounded-3xl shadow-lg space-y-6 relative overflow-hidden" id="math-game-card">
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs font-bold custom-text-muted">Scor: <span id="math-score" class="custom-accent-text text-lg">0</span></span>
+                                <span class="text-xs font-bold custom-text-muted">Timp Rămas: <span id="math-timer" class="text-rose-500 text-lg">30s</span></span>
+                            </div>
+
+                            <!-- Întrebarea Matematică -->
+                            <div id="math-question-screen" class="bg-indigo-50/50 dark:bg-slate-900/50 py-8 px-4 rounded-2xl text-center border custom-border">
+                                <span class="text-xs font-bold uppercase tracking-wider custom-text-muted" id="math-game-status-label">Apasă pe start pentru a începe</span>
+                                <p id="math-equation" class="text-4xl font-friendly font-bold mt-3 text-slate-400">? + ?</p>
+                            </div>
+
+                            <!-- Opțiuni de Răspuns (Butoane) -->
+                            <div class="grid grid-cols-2 gap-3" id="math-options-container">
+                                <button onclick="selectMathAnswer(0)" disabled class="math-opt-btn p-4 rounded-2xl border custom-card text-lg font-bold opacity-50 cursor-not-allowed">A</button>
+                                <button onclick="selectMathAnswer(1)" disabled class="math-opt-btn p-4 rounded-2xl border custom-card text-lg font-bold opacity-50 cursor-not-allowed">B</button>
+                                <button onclick="selectMathAnswer(2)" disabled class="math-opt-btn p-4 rounded-2xl border custom-card text-lg font-bold opacity-50 cursor-not-allowed">C</button>
+                                <button onclick="selectMathAnswer(3)" disabled class="math-opt-btn p-4 rounded-2xl border custom-card text-lg font-bold opacity-50 cursor-not-allowed">D</button>
+                            </div>
+
+                            <!-- Buton control joc -->
+                            <div>
+                                <button onclick="startMathGame()" id="btn-start-math" class="custom-accent-btn px-6 py-3 rounded-2xl text-sm font-bold w-full shadow flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-play"></i> Începe Jocul
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Record personal -->
+                        <div class="flex items-center justify-center gap-2 text-sm font-bold text-amber-500">
+                            <i class="fa-solid fa-crown"></i> Recordul Tău Personal: <span id="math-highscore">0</span> puncte
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Footer / Contact rapid subțire -->
+            <footer class="p-4 text-center text-xs custom-text-muted border-t custom-border mt-auto hidden md:block">
+                <span>© 2026 EduHub. Învățarea este cheia viitorului.</span>
+            </footer>
+        </main>
+    </div>
+
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 custom-card border-t p-2 flex justify-around items-center z-40 bg-opacity-95 backdrop-blur-md">
+        <button onclick="switchTab('dashboard')" class="mobile-nav-btn flex flex-col items-center gap-1 p-2 rounded-xl custom-accent-text text-xs" id="mob-nav-dashboard">
+            <i class="fa-solid fa-house text-lg"></i>
+            <span>Acasă</span>
+        </button>
+        <button onclick="switchTab('schedule')" class="mobile-nav-btn flex flex-col items-center gap-1 p-2 rounded-xl custom-text-muted text-xs" id="mob-nav-schedule">
+            <i class="fa-solid fa-calendar-days text-lg"></i>
+            <span>Orar</span>
+        </button>
+        <button onclick="switchTab('homework')" class="mobile-nav-btn flex flex-col items-center gap-1 p-2 rounded-xl custom-text-muted text-xs" id="mob-nav-homework">
+            <i class="fa-solid fa-book-bookmark text-lg"></i>
+            <span>Teme</span>
+        </button>
+        <button onclick="switchTab('notes')" class="mobile-nav-btn flex flex-col items-center gap-1 p-2 rounded-xl custom-text-muted text-xs" id="mob-nav-notes">
+            <i class="fa-solid fa-note-sticky text-lg"></i>
+            <span>Notițe</span>
+        </button>
+        <button onclick="switchTab('study')" class="mobile-nav-btn flex flex-col items-center gap-1 p-2 rounded-xl custom-text-muted text-xs" id="mob-nav-study">
+            <i class="fa-solid fa-brain text-lg"></i>
+            <span>Studiu</span>
+        </button>
     </nav>
 
-    <header class="hero-section">
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div class="hero-text">
-                <span class="badge">Portal Oficial Școlar</span>
-                <h1>Găsește tot ce ai nevoie pentru <span class="highlight">succesul tău.</span></h1>
+    <div id="mobile-sidebar-drawer" class="fixed inset-0 bg-black/50 z-50 hidden flex justify-end">
+        <div class="w-72 custom-card h-full p-6 flex flex-col justify-between shadow-2xl">
+            <div class="space-y-6">
+                <div class="flex justify-between items-center pb-4 border-b custom-border">
+                    <span class="font-friendly font-bold text-lg custom-accent-text">Meniu EduHub</span>
+                    <button onclick="toggleMobileMenu()" class="text-xl hover:text-rose-500"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="space-y-3">
+                    <button onclick="switchTab('dashboard'); toggleMobileMenu()" class="w-full text-left py-2 px-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-sm flex items-center gap-2"><i class="fa-solid fa-house"></i> Acasă</button>
+                    <button onclick="switchTab('schedule'); toggleMobileMenu()" class="w-full text-left py-2 px-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-sm flex items-center gap-2"><i class="fa-solid fa-calendar-days"></i> Orar Școlar</button>
+                    <button onclick="switchTab('homework'); toggleMobileMenu()" class="w-full text-left py-2 px-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-sm flex items-center gap-2"><i class="fa-solid fa-book-bookmark"></i> Teme & Activități</button>
+                    <button onclick="switchTab('notes'); toggleMobileMenu()" class="w-full text-left py-2 px-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-sm flex items-center gap-2"><i class="fa-solid fa-note-sticky"></i> Notițe Digitale</button>
+                    <button onclick="switchTab('study'); toggleMobileMenu()" class="w-full text-left py-2 px-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-sm flex items-center gap-2"><i class="fa-solid fa-brain"></i> Unelte Studiu</button>
+                    <button onclick="switchTab('break'); toggleMobileMenu()" class="w-full text-left py-2 px-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-sm flex items-center gap-2"><i class="fa-solid fa-gamepad"></i> Pauză Joc</button>
+                </div>
+            </div>
+            <div>
+                <p class="text-xs font-bold custom-text-muted mb-2">Tema Aplicată</p>
+                <div class="grid grid-cols-4 gap-2">
+                    <button onclick="changeTheme('pastel')" class="p-3 bg-[#FFFFFF] border border-[#1E3A8A] rounded-lg text-xs font-bold text-center flex items-center justify-center"><span class="w-3 h-3 rounded-full bg-[#22C55E]"></span></button>
+                    <button onclick="changeTheme('cosmic')" class="p-3 bg-slate-900 border border-[#22C55E] rounded-lg text-xs font-bold text-center"></button>
+                    <button onclick="changeTheme('forest')" class="p-3 bg-emerald-100 border border-[#22C55E] rounded-lg text-xs font-bold text-center"></button>
+                    <button onclick="changeTheme('cyber')" class="p-3 bg-black border border-[#1E3A8A] rounded-lg text-xs font-bold text-center"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- MODAL ORAR -->
+    <div id="modal-schedule" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="custom-card border rounded-2xl p-6 w-full max-w-md shadow-2xl relative">
+            <h3 class="font-friendly font-bold text-lg mb-4 flex items-center gap-2"><i class="fa-solid fa-calendar-plus custom-accent-text"></i> Adaugă Oră în Orar</h3>
+            <div class="space-y-3">
+                <div>
+                    <label class="text-xs font-bold custom-text-muted">Denumire Materie *</label>
+                    <input type="text" id="sch-subject" placeholder="Ex: Matematică, Istorie, Fizică" class="w-full px-3 py-2 mt-1 rounded-xl border custom-border bg-transparent text-sm">
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="text-xs font-bold custom-text-muted">Ziua Săptămânii *</label>
+                        <select id="sch-day" class="w-full px-3 py-2 mt-1 rounded-xl border custom-border bg-white dark:bg-slate-800 text-sm">
+                            <option value="Luni">Luni</option>
+                            <option value="Marți">Marți</option>
+                            <option value="Miercuri">Miercuri</option>
+                            <option value="Joi">Joi</option>
+                            <option value="Vineri">Vineri</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold custom-text-muted">Ora de început *</label>
+                        <input type="time" id="sch-time" class="w-full px-3 py-2 mt-1 rounded-xl border custom-border bg-transparent text-sm">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="text-xs font-bold custom-text-muted">Profesor</label>
+                        <input type="text" id="sch-teacher" placeholder="Ex: Popescu M." class="w-full px-3 py-2 mt-1 rounded-xl border custom-border bg-transparent text-sm">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold custom-text-muted">Sala de clasă</label>
+                        <input type="text" id="sch-room" placeholder="Ex: Sala 12, Lab Fizică" class="w-full px-3 py-2 mt-1 rounded-xl border custom-border bg-transparent text-sm">
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-end gap-2 mt-6">
+                <button onclick="closeModal('modal-schedule')" class="px-4 py-2 rounded-xl border custom-border text-sm font-semibold hover:bg-slate-100 dark:hover:bg-slate-800 transition">Anulează</button>
+                <button onclick="saveScheduleEntry()" class="custom-accent-btn px-4 py-2 rounded-xl text-sm font-bold shadow">Salvează</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL TEME -->
+    <div id="modal-homework" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="custom-card border rounded-2xl p-6 w-full max-w-md shadow-2xl relative">
+            <h3 class="font-friendly font-bold text-lg mb-4 flex items-center gap-2"><i class="fa-solid fa-book-medical custom-accent-text"></i> Adaugă o Temă Nouă</h3>
+            <div class="space-y-3">
+                <div>
+                    <label class="text-xs font-bold custom-text-muted">Titlu / Descriere Temă *</label>
+                    <input type="text" id="hw-title" placeholder="Ex: Exercițiile 1-5 de la pagina 45" class="w-full px-3 py-2 mt-1 rounded-xl border custom-border bg-transparent text-sm">
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="text-xs font-bold custom-text-muted">Materie *</label>
+                        <input type="text" id="hw-subject" placeholder="Ex: Română, Istorie" class="w-full px-3 py-2 mt-1 rounded-xl border custom-border bg-transparent text-sm">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold custom-text-muted">Termen Limită *</label>
+                        <input type="date" id="hw-duedate" class="w-full px-3 py-2 mt-1 rounded-xl border custom-border bg-transparent text-sm">
+                    </div>
+                </div>
+                <div>
+                    <label class="text-xs font-bold custom-text-muted">Nivel de Prioritate</label>
+                    <select id="hw-priority" class="w-full px-3 py-2 mt-1 rounded-xl border custom-border bg-white dark:bg-slate-800 text-sm">
+                        <option value="Mică">🟢 Mică</option>
+                        <option value="Medie" selected>🟡 Medie</option>
+                        <option value="Mare">🔴 Urgentă / Importantă</option>
+                    </select>
+                </div>
+            </div>
+            <div class="flex justify-end gap-2 mt-6">
+                <button onclick="closeModal('modal-homework')" class="px-4 py-2 rounded-xl border custom-border text-sm font-semibold hover:bg-slate-100 dark:hover:bg-slate-800 transition">Anulează</button>
+                <button onclick="saveHomeworkEntry()" class="custom-accent-btn px-4 py-2 rounded-xl text-sm font-bold shadow">Adaugă</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL NOTIȚE -->
+    <div id="modal-notes" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="custom-card border rounded-2xl p-6 w-full max-w-xl shadow-2xl relative">
+            <h3 class="font-friendly font-bold text-lg mb-4 flex items-center gap-2"><i class="fa-solid fa-square-plus custom-accent-text"></i> Scrie o Notiță</h3>
+            <div class="space-y-3">
+                <div>
+                    <label class="text-xs font-bold custom-text-muted">Titlu Notiță *</label>
+                    <input type="text" id="note-title" placeholder="Ex: Formula ariei triunghiului" class="w-full px-3 py-2 mt-1 rounded-xl border custom-border bg-transparent text-sm font-semibold">
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="text-xs font-bold custom-text-muted">Materie / Tag *</label>
+                        <input type="text" id="note-subject" placeholder="Ex: Matematică, Biologie" class="w-full px-3 py-2 mt-1 rounded-xl border custom-border bg-transparent text-sm">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold custom-text-muted">Culoare Notiță</label>
+                        <select id="note-color" class="w-full px-3 py-2 mt-1 rounded-xl border custom-border bg-white dark:bg-slate-800 text-sm">
+                            <option value="indigo">💜 Indigo</option>
+                            <option value="blue">💙 Albastru</option>
+                            <option value="emerald">💚 Verde</option>
+                            <option value="amber">💛 Galben / Portocaliu</option>
+                            <option value="rose">💖 Roz / Roșu</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="text-xs font-bold custom-text-muted">Conținut Notiță *</label>
+                    <textarea id="note-content" rows="6" placeholder="Scrie aici tot ce îți dorești să reții..." class="w-full px-3 py-2 mt-1 rounded-xl border custom-border bg-transparent text-sm focus:outline-none focus:ring-1 focus:ring-[var(--accent)]"></textarea>
+                </div>
+            </div>
+            <div class="flex justify-end gap-2 mt-6">
+                <button onclick="closeModal('modal-notes')" class="px-4 py-2 rounded-xl border custom-border text-sm font-semibold hover:bg-slate-100 dark:hover:bg-slate-800 transition">Anulează</button>
+                <button onclick="saveNoteEntry()" class="custom-accent-btn px-4 py-2 rounded-xl text-sm font-bold shadow">Salvează Notița</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL CARD MEMORIE (FLASHCARD) -->
+    <div id="modal-flashcard" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="custom-card border rounded-2xl p-6 w-full max-w-md shadow-2xl relative">
+            <h3 class="font-friendly font-bold text-lg mb-4 flex items-center gap-2"><i class="fa-solid fa-brain custom-accent-text"></i> Adaugă Card de Memorie</h3>
+            <div class="space-y-3">
+                <div>
+                    <label class="text-xs font-bold custom-text-muted">Întrebare / Termen Față *</label>
+                    <input type="text" id="fc-question" placeholder="Ex: Care este capitala Franței?" class="w-full px-3 py-2 mt-1 rounded-xl border custom-border bg-transparent text-sm">
+                </div>
+                <div>
+                    <label class="text-xs font-bold custom-text-muted">Răspuns / Explicație Spate *</label>
+                    <textarea id="fc-answer" rows="3" placeholder="Ex: Paris" class="w-full px-3 py-2 mt-1 rounded-xl border custom-border bg-transparent text-sm"></textarea>
+                </div>
+            </div>
+            <div class="flex justify-end gap-2 mt-6">
+                <button onclick="closeModal('modal-flashcard')" class="px-4 py-2 rounded-xl border custom-border text-sm font-semibold hover:bg-slate-100 dark:hover:bg-slate-800 transition">Anulează</button>
+                <button onclick="saveFlashcardEntry()" class="custom-accent-btn px-4 py-2 rounded-xl text-sm font-bold shadow">Adaugă Card</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- DATA STATE (Inițializare cu date de test atractive dacă localStorage e gol) ---
+        const initialSchedule = [
+            { id: "s1", subject: "Limba Română", day: "Luni", time: "08:00", teacher: "Popescu Alina", room: "Sala 5" },
+            { id: "s2", subject: "Matematică", day: "Luni", time: "09:00", teacher: "Dumitrescu Ion", room: "Sala 12" },
+            { id: "s3", subject: "Istorie", day: "Luni", time: "10:00", teacher: "Vasile Maria", room: "Sala 2" },
+            { id: "s4", subject: "Geografie", day: "Marți", time: "09:00", teacher: "Stoica D.", room: "Sala Harta" },
+            { id: "s5", subject: "Fizică", day: "Miercuri", time: "11:00", teacher: "Andrei G.", room: "Laborator" }
+        ];
+
+        const initialHomeworks = [
+            { id: "h1", title: "De terminat exercițiile 3 și 4 din culegerea de algebră.", subject: "Matematică", duedate: "2026-06-15", priority: "Mare", completed: false },
+            { id: "h2", title: "Lectură: de citit capitolul 3 din volumul recomandat.", subject: "Limba Română", duedate: "2026-06-18", priority: "Medie", completed: false },
+            { id: "h3", title: "Desen: realizarea unui peisaj de vară în acuarele.", subject: "Educație Plastică", duedate: "2026-06-12", priority: "Mică", completed: true }
+        ];
+
+        const initialNotes = [
+            { id: "n1", title: "Tabelul Periodic - Grupa 1", subject: "Chimie", color: "indigo", content: "Metalele alcaline: Hidrogen (H), Litiu (Li), Sodiu (Na), Potasiu (K), Rubidiu (Rb), Cesiu (Cs), Franciu (Fr).\n- Sunt foarte reactive.\n- Reacționează violent cu apa.", date: "2026-06-05" },
+            { id: "n2", title: "Teorema lui Pitagora", subject: "Matematică", color: "amber", content: "Într-un triunghi dreptunghic, pătratul lungimii ipotenuzei este egal cu suma pătratelor lungimilor catetelor.\nFormulă:\na² + b² = c²\nUnde c este ipotenuza.", date: "2026-06-08" }
+        ];
+
+        const initialFlashcards = [
+            { id: "f1", question: "Ce este fotosinteza?", answer: "Procesul prin care plantele transformă dioxidul de carbon și apa în oxigen și carbohidrați utilizând lumina solară." },
+            { id: "f2", question: "Care este formula ariei cercului?", answer: "Aria = π * r², unde r este raza cercului." },
+            { id: "f3", question: "În ce an a avut loc Marea Unire din România?", answer: "La 1 Decembrie 1918, la Alba Iulia." }
+        ];
+
+        let state = {
+            schedule: JSON.parse(localStorage.getItem('eduhub_schedule')) || initialSchedule,
+            homeworks: JSON.parse(localStorage.getItem('eduhub_homeworks')) || initialHomeworks,
+            notes: JSON.parse(localStorage.getItem('eduhub_notes')) || initialNotes,
+            flashcards: JSON.parse(localStorage.getItem('eduhub_flashcards')) || initialFlashcards,
+            activeTab: 'dashboard',
+            activeDayTab: 'Luni',
+            activeHwFilter: 'toate',
+            activeNoteSubject: 'toate',
+            activeFlashcardIdx: 0,
+            mathHighScore: parseInt(localStorage.getItem('eduhub_math_highscore')) || 0
+        };
+
+        // Salvare stare generală
+        function saveState() {
+            localStorage.setItem('eduhub_schedule', JSON.stringify(state.schedule));
+            localStorage.setItem('eduhub_homeworks', JSON.stringify(state.homeworks));
+            localStorage.setItem('eduhub_notes', JSON.stringify(state.notes));
+            localStorage.setItem('eduhub_flashcards', JSON.stringify(state.flashcards));
+            localStorage.setItem('eduhub_math_highscore', state.mathHighScore.toString());
+        }
+
+        // --- SISTEM DE SUNET CU WEB AUDIO API (Fără resurse externe) ---
+        function playAppSound(type) {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
                 
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Caută orar, cursuri, profesori...">
-                    <button>Caută</button>
-                </div>
-            </div>
-            <div class="hero-visual">
-                <div class="floating-shape s1"><i class="fas fa-atom"></i></div>
-                <div class="hero-card">
-                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=600" alt="Elev">
-                </div>
-            </div>
-        </div>
-    </header>
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                
+                if (type === 'click') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(600, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(150, ctx.currentTime + 0.1);
+                    gain.gain.setValueAtTime(0.05, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.1);
+                } else if (type === 'success') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
+                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.08); // E5
+                    osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.16); // G5
+                    gain.gain.setValueAtTime(0.08, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.3);
+                } else if (type === 'alarm') {
+                    osc.type = 'square';
+                    osc.frequency.setValueAtTime(880, ctx.currentTime);
+                    osc.frequency.setValueAtTime(440, ctx.currentTime + 0.15);
+                    osc.frequency.setValueAtTime(880, ctx.currentTime + 0.3);
+                    gain.gain.setValueAtTime(0.1, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.5);
+                } else if (type === 'wrong') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(220, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(110, ctx.currentTime + 0.25);
+                    gain.gain.setValueAtTime(0.1, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.25);
+                }
+            } catch (e) {
+                console.log("AudioContext nu este încă inițializat/permis.");
+            }
+        }
 
-    <main class="max-w-7xl mx-auto px-6 py-12">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="info-card">
-                <h3>Programul Zilei</h3>
-                <div class="schedule-item active">
-                    <span class="time">09:00</span>
-                    <span class="subject">Informatică</span>
-                </div>
-                <div class="schedule-item">
-                    <span class="time">10:00</span>
-                    <span class="subject">Matematică</span>
-                </div>
-            </div>
-            <!-- Mai multe secțiuni aici conform imaginii -->
-        </div>
-    </main>
+        // --- SISTEM DE NOTIFICĂRI MODERNE ---
+        function showNotification(message, isSuccess = true) {
+            const notif = document.getElementById('app-notification');
+            const notifMsg = document.getElementById('notif-message');
+            const notifIcon = document.getElementById('notif-icon');
+            
+            notifMsg.textContent = message;
+            if (isSuccess) {
+                notifIcon.innerHTML = `<i class="fa-solid fa-circle-check"></i>`;
+                notifIcon.className = "text-emerald-400 text-lg";
+                playAppSound('success');
+            } else {
+                notifIcon.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>`;
+                notifIcon.className = "text-rose-400 text-lg";
+                playAppSound('wrong');
+            }
 
-    <script src="script.js"></script>
+            notif.classList.remove('translate-x-80', 'opacity-0');
+            notif.classList.add('translate-x-0', 'opacity-100');
+
+            setTimeout(() => {
+                notif.classList.remove('translate-x-0', 'opacity-100');
+                notif.classList.add('translate-x-80', 'opacity-0');
+            }, 3000);
+        }
+
+        // --- SCHIMBARE TEMĂ VIZUALĂ ---
+        function changeTheme(themeName) {
+            document.body.className = `theme-${themeName} custom-bg custom-text min-h-screen flex flex-col transition-colors duration-300`;
+            localStorage.setItem('eduhub_theme', themeName);
+            playAppSound('click');
+        }
+
+        // --- COPIERE/EXPORT NOTIȚĂ rapid ---
+        function copyTextToClipboard(text) {
+            const tempInput = document.createElement("textarea");
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            showNotification("Copiat în clipboard!");
+        }
+
+        // --- SCHIMBARE TAB-URI PRINCIPALE (SPA Engine) ---
+        function switchTab(tabId) {
+            playAppSound('click');
+            state.activeTab = tabId;
+            
+            // Ascunde toate secțiunile
+            document.querySelectorAll('#workspace-content > section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            // Afișează secțiunea curentă
+            document.getElementById(`view-${tabId}`).classList.remove('hidden');
+
+            // Actualizează elementele de navigație desktop active
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.className = "nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition duration-200 font-medium text-sm custom-text-muted hover:bg-slate-100 dark:hover:bg-slate-800 dark:hover:bg-slate-700";
+            });
+            const activeNavBtn = document.getElementById(`nav-${tabId}`);
+            if (activeNavBtn) {
+                activeNavBtn.className = "nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition duration-200 font-medium text-sm active-nav custom-accent-light-bg custom-accent-text";
+            }
+
+            // Actualizează elementele de navigație mobile active
+            document.querySelectorAll('.mobile-nav-btn').forEach(btn => {
+                btn.className = "mobile-nav-btn flex flex-col items-center gap-1 p-2 rounded-xl custom-text-muted text-xs";
+            });
+            const activeMobBtn = document.getElementById(`mob-nav-${tabId}`);
+            if (activeMobBtn) {
+                activeMobBtn.className = "mobile-nav-btn flex flex-col items-center gap-1 p-2 rounded-xl custom-accent-text text-xs font-bold";
+            }
+
+            // Încărcări specifice tab-ului
+            if (tabId === 'dashboard') {
+                renderDashboard();
+            } else if (tabId === 'schedule') {
+                renderSchedule();
+            } else if (tabId === 'homework') {
+                renderHomeworks();
+            } else if (tabId === 'notes') {
+                renderNotes();
+            } else if (tabId === 'study') {
+                renderFlashcards();
+            } else if (tabId === 'break') {
+                renderMathGameStats();
+            }
+        }
+
+        // --- UTILITAR: CEAS ȘI SĂPTĂMÂNĂ ȘCOLARĂ ---
+        function initTimeAndClock() {
+            const clockEl = document.getElementById('digital-clock');
+            const weekEl = document.getElementById('current-school-week');
+
+            const quotes = [
+                { q: "Cea mai bună metodă de a prezice viitorul este să îl creezi.", a: "Abraham Lincoln" },
+                { q: "Învățarea nu se termină niciodată în sala de clasă.", a: "Anonim" },
+                { q: "Fiecare realizare remarcabilă începe cu decizia de a încerca.", a: "Gail Devers" },
+                { q: "Succesul este suma unor eforturi mici, repetate zi de zi.", a: "Robert Collier" },
+                { q: "Greșelile sunt dovada clară că încerci.", a: "Anonim" }
+            ];
+
+            // Setare citat la întâmplare
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            document.getElementById('motivational-quote').innerText = `"${randomQuote.q}"`;
+            document.getElementById('motivational-author').innerText = `- ${randomQuote.a}`;
+
+            function updateClock() {
+                const now = new Date();
+                const options = { weekday: 'long', day: 'numeric', month: 'short' };
+                const formattedDate = now.toLocaleDateString('ro-RO', options);
+                const formattedTime = now.toLocaleTimeString('ro-RO', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                
+                if (clockEl) {
+                    clockEl.innerHTML = `<span class="capitalize">${formattedDate}</span> | <span class="font-bold">${formattedTime}</span>`;
+                }
+                if (weekEl) {
+                    weekEl.innerText = "Săptămâna de Studiu Activă 🎒";
+                }
+            }
+            setInterval(updateClock, 1000);
+            updateClock();
+        }
+
+        // Control meniu mobil
+        function toggleMobileMenu() {
+            const drawer = document.getElementById('mobile-sidebar-drawer');
+            drawer.classList.toggle('hidden');
+        }
+
+        // --- DESCHIDERE / ÎNCHIDERE MODALE ---
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        // --- STREAMING_CHUNK: GESTIUNE ȘI REDARE ORAR (Schedule CRUD) ---
+        function openAddScheduleModal() {
+            openModal('modal-schedule');
+        }
+
+        function filterScheduleDay(dayName) {
+            state.activeDayTab = dayName;
+            document.querySelectorAll('.schedule-day-tab').forEach(tab => {
+                tab.className = "schedule-day-tab px-4 py-2 rounded-xl text-sm font-bold border transition shrink-0 custom-card custom-text-muted";
+            });
+            const activeTab = document.getElementById(`tab-day-${dayName}`);
+            if (activeTab) {
+                activeTab.className = "schedule-day-tab px-4 py-2 rounded-xl text-sm font-bold border transition shrink-0 bg-indigo-600 text-white";
+            }
+            renderSchedule();
+        }
+
+        function saveScheduleEntry() {
+            const subject = document.getElementById('sch-subject').value.trim();
+            const day = document.getElementById('sch-day').value;
+            const time = document.getElementById('sch-time').value;
+            const teacher = document.getElementById('sch-teacher').value.trim() || 'Nespecificat';
+            const room = document.getElementById('sch-room').value.trim() || 'Nespecificat';
+
+            if (!subject || !time) {
+                showNotification("Te rugăm să completezi materia și ora!", false);
+                return;
+            }
+
+            const newEntry = {
+                id: 'sch-' + Date.now(),
+                subject, day, time, teacher, room
+            };
+
+            state.schedule.push(newEntry);
+            saveState();
+            closeModal('modal-schedule');
+            showNotification("Oră adăugată cu succes!");
+            
+            // Curățare câmpuri
+            document.getElementById('sch-subject').value = '';
+            document.getElementById('sch-time').value = '';
+            document.getElementById('sch-teacher').value = '';
+            document.getElementById('sch-room').value = '';
+
+            renderSchedule();
+            renderDashboard();
+        }
+
+        function deleteScheduleEntry(id) {
+            state.schedule = state.schedule.filter(item => item.id !== id);
+            saveState();
+            showNotification("Oră ștearsă din orar!");
+            renderSchedule();
+            renderDashboard();
+        }
+
+        function renderSchedule() {
+            const container = document.getElementById('schedule-timeline-container');
+            container.innerHTML = '';
+
+            const dayEntries = state.schedule
+                .filter(item => item.day === state.activeDayTab)
+                .sort((a, b) => a.time.localeCompare(b.time));
+
+            if (dayEntries.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-10">
+                        <p class="custom-text-muted text-sm mb-2">Nu ai ore adăugate pentru ziua de ${state.activeDayTab}.</p>
+                        <p class="text-xs text-indigo-500">Apasă pe butonul de mai sus pentru a-ți planifica ziua.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            dayEntries.forEach(item => {
+                const row = document.createElement('div');
+                row.className = "flex items-center justify-between p-4 rounded-xl border custom-border bg-slate-50/50 dark:bg-slate-900/40 hover:scale-[1.01] transition shadow-sm";
+                row.innerHTML = `
+                    <div class="flex items-center gap-4">
+                        <div class="px-3 py-2 rounded-xl bg-indigo-100 dark:bg-indigo-950/40 text-indigo-600 text-sm font-bold shrink-0">
+                            <i class="fa-regular fa-clock"></i> ${item.time}
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm md:text-base">${item.subject}</h4>
+                            <div class="flex flex-wrap gap-x-3 gap-y-1 text-xs custom-text-muted mt-0.5">
+                                <span><i class="fa-solid fa-user-tie"></i> ${item.teacher}</span>
+                                <span><i class="fa-solid fa-location-dot"></i> ${item.room}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="deleteScheduleEntry('${item.id}')" class="text-rose-500 hover:text-rose-700 p-2 text-sm" title="Șterge">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        // --- STREAMING_CHUNK: GESTIUNE ȘI REDARE TEME (Homework CRUD) ---
+        function openAddHomeworkModal() {
+            openModal('modal-homework');
+            // Pune data de mâine ca default în selector
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            document.getElementById('hw-duedate').value = tomorrow.toISOString().split('T')[0];
+        }
+
+        function filterHomeworks(filter) {
+            state.activeHwFilter = filter;
+            document.querySelectorAll('.hw-filter-btn').forEach(btn => {
+                btn.className = "hw-filter-btn text-sm font-bold custom-text-muted pb-3";
+            });
+            const activeBtn = document.getElementById(`hw-filter-${filter}`);
+            if (activeBtn) {
+                activeBtn.className = "hw-filter-btn text-sm font-bold custom-accent-text border-b-2 border-[var(--accent)] pb-3";
+            }
+            renderHomeworks();
+        }
+
+        function saveHomeworkEntry() {
+            const title = document.getElementById('hw-title').value.trim();
+            const subject = document.getElementById('hw-subject').value.trim();
+            const duedate = document.getElementById('hw-duedate').value;
+            const priority = document.getElementById('hw-priority').value;
+
+            if (!title || !subject || !duedate) {
+                showNotification("Completează toate câmpurile obligatorii!", false);
+                return;
+            }
+
+            const newHw = {
+                id: 'hw-' + Date.now(),
+                title, subject, duedate, priority, completed: false
+            };
+
+            state.homeworks.push(newHw);
+            saveState();
+            closeModal('modal-homework');
+            showNotification("Temă creată!");
+
+            // Curățare
+            document.getElementById('hw-title').value = '';
+            document.getElementById('hw-subject').value = '';
+
+            renderHomeworks();
+            renderDashboard();
+        }
+
+        function toggleHomeworkStatus(id) {
+            const index = state.homeworks.findIndex(item => item.id === id);
+            if (index !== -1) {
+                state.homeworks[index].completed = !state.homeworks[index].completed;
+                saveState();
+                showNotification(state.homeworks[index].completed ? "Bravo! Temă finalizată! 🎉" : "Temă marcată ca activă.");
+                renderHomeworks();
+                renderDashboard();
+            }
+        }
+
+        function deleteHomework(id) {
+            state.homeworks = state.homeworks.filter(item => item.id !== id);
+            saveState();
+            showNotification("Tema a fost ștearsă.");
+            renderHomeworks();
+            renderDashboard();
+        }
+
+        function renderHomeworks() {
+            const grid = document.getElementById('homeworks-grid');
+            grid.innerHTML = '';
+
+            let filteredList = state.homeworks;
+            if (state.activeHwFilter === 'active') {
+                filteredList = state.homeworks.filter(item => !item.completed);
+            } else if (state.activeHwFilter === 'completate') {
+                filteredList = state.homeworks.filter(item => item.completed);
+            }
+
+            // Sortare prioritară: urgențele primele
+            const pMap = { "Mare": 3, "Medie": 2, "Mică": 1 };
+            filteredList.sort((a, b) => pMap[b.priority] - pMap[a.priority] || a.duedate.localeCompare(b.duedate));
+
+            if (filteredList.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-10 custom-card border rounded-2xl">
+                        <p class="custom-text-muted text-sm mb-2">Nu există nicio temă de afișat în această listă.</p>
+                        <p class="text-xs text-indigo-500">Creează una nouă apasând pe "Creează Temă Nouă".</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filteredList.forEach(item => {
+                const card = document.createElement('div');
+                const isCompleted = item.completed;
+                const dateObj = new Date(item.duedate);
+                const formattedDate = dateObj.toLocaleDateString('ro-RO', { day: 'numeric', month: 'short' });
+
+                let priorityBadge = '';
+                if (item.priority === 'Mare') priorityBadge = '<span class="text-[10px] bg-rose-100 text-rose-700 px-2 py-0.5 rounded-full font-bold">🔴 Urgentă</span>';
+                else if (item.priority === 'Medie') priorityBadge = '<span class="text-[10px] bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-bold">🟡 Medie</span>';
+                else priorityBadge = '<span class="text-[10px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-bold">🟢 Mică</span>';
+
+                card.className = `custom-card border p-5 rounded-2xl shadow-sm flex flex-col justify-between hover:scale-[1.02] transition duration-200 relative ${isCompleted ? 'opacity-65' : ''}`;
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-start gap-2 mb-3">
+                            <span class="text-xs font-bold custom-accent-text uppercase tracking-wider">${item.subject}</span>
+                            <div class="flex gap-1.5 items-center">
+                                ${priorityBadge}
+                            </div>
+                        </div>
+                        <p class="text-sm font-semibold mb-4 leading-relaxed ${isCompleted ? 'line-through text-slate-400' : ''}">${item.title}</p>
+                    </div>
+                    <div class="flex items-center justify-between border-t custom-border pt-4 mt-2">
+                        <span class="text-xs custom-text-muted font-medium flex items-center gap-1">
+                            <i class="fa-regular fa-calendar-check"></i> Limită: ${formattedDate}
+                        </span>
+                        <div class="flex items-center gap-2">
+                            <button onclick="toggleHomeworkStatus('${item.id}')" class="p-2 rounded-xl ${isCompleted ? 'bg-indigo-100 text-indigo-600' : 'bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700'} text-xs font-bold flex items-center gap-1 transition" title="${isCompleted ? 'Marchează ca nefinalizată' : 'Marchează ca completă'}">
+                                <i class="${isCompleted ? 'fa-solid fa-circle-check text-indigo-600' : 'fa-regular fa-circle'} text-sm"></i>
+                                <span>${isCompleted ? 'Finalizată' : 'Gata'}</span>
+                            </button>
+                            <button onclick="deleteHomework('${item.id}')" class="text-rose-500 hover:text-rose-700 p-2 text-sm" title="Șterge">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // --- STREAMING_CHUNK: GESTIUNE ȘI REDARE NOTIȚE DIGITALE (Notes CRUD) ---
+        function openAddNoteModal() {
+            openModal('modal-notes');
+        }
+
+        function selectNoteSubjectFilter(subject) {
+            state.activeNoteSubject = subject;
+            renderNotes();
+        }
+
+        function saveNoteEntry() {
+            const title = document.getElementById('note-title').value.trim();
+            const subject = document.getElementById('note-subject').value.trim();
+            const color = document.getElementById('note-color').value;
+            const content = document.getElementById('note-content').value.trim();
+
+            if (!title || !subject || !content) {
+                showNotification("Te rugăm să introduci titlul, materia și conținutul!", false);
+                return;
+            }
+
+            const today = new Date().toISOString().split('T')[0];
+            const newNote = {
+                id: 'note-' + Date.now(),
+                title, subject, color, content, date: today
+            };
+
+            state.notes.push(newNote);
+            saveState();
+            closeModal('modal-notes');
+            showNotification("Notiță salvată!");
+
+            // Curățare
+            document.getElementById('note-title').value = '';
+            document.getElementById('note-subject').value = '';
+            document.getElementById('note-content').value = '';
+
+            renderNotes();
+            renderDashboard();
+        }
+
+        function deleteNote(id) {
+            state.notes = state.notes.filter(item => item.id !== id);
+            saveState();
+            showNotification("Notiță ștearsă!");
+            renderNotes();
+            renderDashboard();
+        }
+
+        function renderNotes() {
+            const grid = document.getElementById('notes-grid');
+            const subjectsFilterContainer = document.getElementById('notes-subjects-filter');
+            grid.innerHTML = '';
+
+            // Render filtrul de materii (dinamic din notițele existente)
+            const allSubjects = ['toate', ...new Set(state.notes.map(n => n.subject.toLowerCase()))];
+            subjectsFilterContainer.innerHTML = '';
+            allSubjects.forEach(sub => {
+                const isSelected = state.activeNoteSubject === sub;
+                const btn = document.createElement('button');
+                btn.onclick = () => selectNoteSubjectFilter(sub);
+                btn.className = `px-3.5 py-1.5 rounded-full text-xs font-bold capitalize transition shrink-0 border ${isSelected ? 'bg-indigo-600 text-white' : 'custom-card custom-text-muted hover:bg-slate-100'}`;
+                btn.innerText = sub;
+                subjectsFilterContainer.appendChild(btn);
+            });
+
+            // Filtrare notițe
+            const filteredNotes = state.activeNoteSubject === 'toate' 
+                ? state.notes 
+                : state.notes.filter(n => n.subject.toLowerCase() === state.activeNoteSubject);
+
+            if (filteredNotes.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-10 custom-card border rounded-2xl">
+                        <p class="custom-text-muted text-sm mb-2">Nu ai notițe în această secțiune.</p>
+                        <p class="text-xs text-indigo-500">Adaugă una dând click pe "Scrie o Notiță".</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filteredNotes.forEach(item => {
+                const card = document.createElement('div');
+                
+                // Hartă de culori pentru stilizare de impact
+                const colorMap = {
+                    indigo: 'border-l-indigo-500 bg-indigo-50/20 dark:bg-indigo-950/10',
+                    blue: 'border-l-blue-500 bg-blue-50/20 dark:bg-blue-950/10',
+                    emerald: 'border-l-emerald-500 bg-emerald-50/20 dark:bg-emerald-950/10',
+                    amber: 'border-l-amber-500 bg-amber-50/20 dark:bg-amber-950/10',
+                    rose: 'border-l-rose-500 bg-rose-50/20 dark:bg-rose-950/10',
+                };
+                const classColor = colorMap[item.color] || 'border-l-indigo-500 bg-indigo-50/20';
+
+                card.className = `custom-card border border-l-4 ${classColor} p-5 rounded-r-2xl rounded-l-md shadow-sm flex flex-col justify-between hover:scale-[1.02] transition duration-200`;
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-start gap-2 mb-2">
+                            <span class="text-[10px] font-bold uppercase tracking-widest bg-slate-200/50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-2 py-0.5 rounded-full">${item.subject}</span>
+                            <span class="text-[10px] custom-text-muted">${item.date}</span>
+                        </div>
+                        <h4 class="font-friendly font-bold text-base mb-3 leading-tight">${item.title}</h4>
+                        <p class="text-xs leading-relaxed whitespace-pre-wrap mb-4 line-clamp-6 opacity-90">${item.content}</p>
+                    </div>
+                    <div class="flex justify-end items-center gap-2 border-t custom-border pt-3 mt-2">
+                        <button onclick="copyTextToClipboard(\`${item.title}\\n\\nMateria: ${item.subject}\\n\\n${item.content}\`)" class="p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-bold custom-text-muted flex items-center gap-1 transition" title="Copiază textul">
+                            <i class="fa-regular fa-copy text-sm"></i> Copiază
+                        </button>
+                        <button onclick="deleteNote('${item.id}')" class="text-rose-500 hover:text-rose-700 p-2 text-sm" title="Șterge">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // --- STREAMING_CHUNK: UNELTE DE STUDIU - POMODORO TIMER ---
+        let pomodoroInterval = null;
+        let pomodoroSecondsLeft = 25 * 60;
+        let isPomodoroRunning = false;
+        let pomodoroMode = 'focus'; // 'focus' sau 'break'
+
+        function updatePomoSettings() {
+            if (!isPomodoroRunning) {
+                const focusMin = parseInt(document.getElementById('input-pomo-focus').value) || 25;
+                pomodoroSecondsLeft = focusMin * 60;
+                displayPomodoroTime();
+            }
+        }
+
+        function displayPomodoroTime() {
+            const minutes = Math.floor(pomodoroSecondsLeft / 60);
+            const seconds = pomodoroSecondsLeft % 60;
+            const timeStr = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            document.getElementById('pomodoro-time-display').innerText = timeStr;
+        }
+
+        function togglePomodoroTimer() {
+            playAppSound('click');
+            const startBtn = document.getElementById('btn-pomodoro-start');
+            
+            if (isPomodoroRunning) {
+                // Oprire
+                clearInterval(pomodoroInterval);
+                isPomodoroRunning = false;
+                startBtn.innerHTML = `<i class="fa-solid fa-play"></i> Start`;
+            } else {
+                // Pornire
+                isPomodoroRunning = true;
+                startBtn.innerHTML = `<i class="fa-solid fa-pause"></i> Pauză`;
+                pomodoroInterval = setInterval(() => {
+                    pomodoroSecondsLeft--;
+                    displayPomodoroTime();
+
+                    if (pomodoroSecondsLeft <= 0) {
+                        clearInterval(pomodoroInterval);
+                        isPomodoroRunning = false;
+                        startBtn.innerHTML = `<i class="fa-solid fa-play"></i> Start`;
+                        
+                        playAppSound('alarm');
+
+                        if (pomodoroMode === 'focus') {
+                            showNotification("Minunat! Sesiune de studiu completată! Fă o pauză. ☕");
+                            pomodoroMode = 'break';
+                            document.getElementById('pomodoro-state-label').innerText = "Timpul de Pauză Meritată ☕";
+                            const breakMin = parseInt(document.getElementById('input-pomo-break').value) || 5;
+                            pomodoroSecondsLeft = breakMin * 60;
+                        } else {
+                            showNotification("Pauza s-a terminat. Înapoi la învățat! 🚀");
+                            pomodoroMode = 'focus';
+                            document.getElementById('pomodoro-state-label').innerText = "Concentrare la Studiu 📖";
+                            const focusMin = parseInt(document.getElementById('input-pomo-focus').value) || 25;
+                            pomodoroSecondsLeft = focusMin * 60;
+                        }
+                        displayPomodoroTime();
+                    }
+                }, 1000);
+            }
+        }
+
+        function resetPomodoroTimer() {
+            playAppSound('click');
+            clearInterval(pomodoroInterval);
+            isPomodoroRunning = false;
+            pomodoroMode = 'focus';
+            document.getElementById('pomodoro-state-label').innerText = "Pregătit de Studiu 📖";
+            document.getElementById('btn-pomodoro-start').innerHTML = `<i class="fa-solid fa-play"></i> Start`;
+            
+            const focusMin = parseInt(document.getElementById('input-pomo-focus').value) || 25;
+            pomodoroSecondsLeft = focusMin * 60;
+            displayPomodoroTime();
+        }
+
+        function startPomodoroDirectly() {
+            resetPomodoroTimer();
+            togglePomodoroTimer();
+        }
+
+        // --- STREAMING_CHUNK: UNELTE DE STUDIU - FLASHCARDS ENGINE ---
+        function switchStudySubTab(subTab) {
+            playAppSound('click');
+            // Ascunde toate sub-vizualizările
+            document.getElementById('sub-view-pomodoro').classList.add('hidden');
+            document.getElementById('sub-view-flashcards').classList.add('hidden');
+            document.getElementById('sub-view-calculator').classList.add('hidden');
+
+            // Reset tab styles
+            document.getElementById('btn-sub-pomodoro').className = "py-2.5 text-xs sm:text-sm font-bold rounded-xl transition custom-text-muted";
+            document.getElementById('btn-sub-flashcards').className = "py-2.5 text-xs sm:text-sm font-bold rounded-xl transition custom-text-muted";
+            document.getElementById('btn-sub-calculator').className = "py-2.5 text-xs sm:text-sm font-bold rounded-xl transition custom-text-muted";
+
+            // Activează sub-tab-ul curent
+            document.getElementById(`sub-view-${subTab}`).classList.remove('hidden');
+            document.getElementById(`btn-sub-${subTab}`).className = "py-2.5 text-xs sm:text-sm font-bold rounded-xl transition bg-white dark:bg-slate-700 shadow-sm";
+            
+            if (subTab === 'flashcards') renderFlashcards();
+        }
+
+        function openAddFlashcardModal() {
+            openModal('modal-flashcard');
+        }
+
+        function saveFlashcardEntry() {
+            const question = document.getElementById('fc-question').value.trim();
+            const answer = document.getElementById('fc-answer').value.trim();
+
+            if (!question || !answer) {
+                showNotification("Te rugăm să completezi ambele fețe!", false);
+                return;
+            }
+
+            const newFc = {
+                id: 'fc-' + Date.now(),
+                question, answer
+            };
+
+            state.flashcards.push(newFc);
+            saveState();
+            closeModal('modal-flashcard');
+            showNotification("Card creat!");
+
+            // Curățare
+            document.getElementById('fc-question').value = '';
+            document.getElementById('fc-answer').value = '';
+
+            state.activeFlashcardIdx = state.flashcards.length - 1;
+            renderFlashcards();
+        }
+
+        function renderFlashcards() {
+            const gameArea = document.getElementById('flashcards-game-area');
+            const emptyState = document.getElementById('flashcards-empty-state');
+            const cardInner = document.getElementById('flashcard-element');
+
+            // Resetare flip întotdeauna la redare
+            cardInner.classList.remove('flashcard-flipped');
+
+            if (state.flashcards.length === 0) {
+                gameArea.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            gameArea.classList.remove('hidden');
+            emptyState.classList.add('hidden');
+
+            const current = state.flashcards[state.activeFlashcardIdx];
+            document.getElementById('flashcard-q-text').innerText = current.question;
+            document.getElementById('flashcard-a-text').innerText = current.answer;
+            document.getElementById('flashcard-counter').innerText = `${state.activeFlashcardIdx + 1} din ${state.flashcards.length}`;
+        }
+
+        function flipCurrentFlashcard() {
+            playAppSound('click');
+            const cardInner = document.getElementById('flashcard-element');
+            cardInner.classList.toggle('flashcard-flipped');
+        }
+
+        function nextFlashcard() {
+            playAppSound('click');
+            if (state.flashcards.length === 0) return;
+            state.activeFlashcardIdx = (state.activeFlashcardIdx + 1) % state.flashcards.length;
+            renderFlashcards();
+        }
+
+        function prevFlashcard() {
+            playAppSound('click');
+            if (state.flashcards.length === 0) return;
+            state.activeFlashcardIdx = (state.activeFlashcardIdx - 1 + state.flashcards.length) % state.flashcards.length;
+            renderFlashcards();
+        }
+
+        // --- CALCULATOR & CONVERTOR DE UNITĂȚI ---
+        function pressCalc(val) {
+            playAppSound('click');
+            const screen = document.getElementById('calc-screen');
+            if (val === 'C') {
+                screen.value = '';
+            } else if (val === '=') {
+                try {
+                    // Evaluare sigură pentru ecuații simple matematice basic
+                    const expression = screen.value.replace(/[^0-9+\-*/().]/g, '');
+                    const result = eval(expression);
+                    screen.value = result !== undefined ? result : '';
+                } catch (e) {
+                    screen.value = 'Eroare';
+                }
+            } else {
+                if (screen.value === 'Eroare') screen.value = '';
+                screen.value += val;
+            }
+        }
+
+        function runUnitConversion() {
+            const val = parseFloat(document.getElementById('input-conv-val').value) || 0;
+            const from = document.getElementById('select-conv-from').value;
+            const to = document.getElementById('select-conv-to').value;
+            const resultEl = document.getElementById('conversion-result');
+
+            // Relații simple de calcul unitar
+            // Baza în m, g, l
+            const unitsInBase = {
+                m: 1, km: 1000, cm: 0.01,
+                kg: 1, g: 0.001,
+                l: 1, ml: 0.001
+            };
+
+            const labelMap = {
+                m: "Metri (m)", km: "Kilometri (km)", cm: "Centimetri (cm)",
+                kg: "Kilograme (kg)", g: "Grame (g)", l: "Litri (L)", ml: "Mililitri (mL)"
+            };
+
+            // Verificare tip compatibil (lungimi cu lungimi, mase cu mase etc.)
+            const groups = {
+                lungime: ['m', 'km', 'cm'],
+                masa: ['kg', 'g'],
+                volum: ['l', 'ml']
+            };
+
+            let fromGroup = '', toGroup = '';
+            for (let g in groups) {
+                if (groups[g].includes(from)) fromGroup = g;
+                if (groups[g].includes(to)) toGroup = g;
+            }
+
+            if (fromGroup !== toGroup) {
+                resultEl.innerText = "Unități incompatibile!";
+                return;
+            }
+
+            const valInBase = val * unitsInBase[from];
+            const finalVal = valInBase / unitsInBase[to];
+            
+            resultEl.innerText = `${finalVal.toLocaleString('ro-RO')} ${labelMap[to]}`;
+        }
+
+        // --- STREAMING_CHUNK: JOCUL DE MATEMATICĂ (Break Game) ---
+        let gameTimer = null;
+        let gameTimeLeft = 30;
+        let gameScore = 0;
+        let isGameRunning = false;
+        let correctAnswer = 0;
+
+        function renderMathGameStats() {
+            document.getElementById('math-highscore').innerText = state.mathHighScore;
+        }
+
+        function startMathGame() {
+            playAppSound('click');
+            isGameRunning = true;
+            gameTimeLeft = 30;
+            gameScore = 0;
+            document.getElementById('math-score').innerText = gameScore;
+            document.getElementById('math-timer').innerText = '30s';
+            document.getElementById('math-game-status-label').innerText = "Rezolvă ecuația!";
+            document.getElementById('btn-start-math').classList.add('hidden');
+
+            // Activează butoanele de opțiuni
+            document.querySelectorAll('.math-opt-btn').forEach(btn => {
+                btn.disabled = false;
+                btn.classList.remove('opacity-50', 'cursor-not-allowed', 'bg-rose-500', 'bg-emerald-500', 'text-white');
+            });
+
+            generateMathEquation();
+
+            clearInterval(gameTimer);
+            gameTimer = setInterval(() => {
+                gameTimeLeft--;
+                document.getElementById('math-timer').innerText = gameTimeLeft + 's';
+
+                if (gameTimeLeft <= 0) {
+                    endMathGame();
+                }
+            }, 1000);
+        }
+
+        function generateMathEquation() {
+            // Generare numere la întâmplare adecvate pentru copii
+            const num1 = Math.floor(Math.random() * 20) + 1;
+            const num2 = Math.floor(Math.random() * 20) + 1;
+            const operators = ['+', '-', '*'];
+            const op = operators[Math.floor(Math.random() * operators.length)];
+
+            let ans = 0;
+            if (op === '+') ans = num1 + num2;
+            else if (op === '-') ans = num1 - num2;
+            else if (op === '*') ans = num1 * num2;
+
+            correctAnswer = ans;
+            document.getElementById('math-equation').innerText = `${num1} ${op} ${num2}`;
+
+            // Generare răspunsuri greșite plauzibile
+            let options = [ans];
+            while (options.length < 4) {
+                const dev = (Math.floor(Math.random() * 6) + 1) * (Math.random() < 0.5 ? 1 : -1);
+                const wrongAns = ans + dev;
+                if (!options.includes(wrongAns)) {
+                    options.push(wrongAns);
+                }
+            }
+
+            // Amestecă opțiunile
+            options.sort(() => Math.random() - 0.5);
+
+            const optButtons = document.querySelectorAll('.math-opt-btn');
+            options.forEach((val, idx) => {
+                optButtons[idx].innerText = val;
+                optButtons[idx].classList.remove('bg-emerald-500', 'bg-rose-500', 'text-white');
+                optButtons[idx].setAttribute('data-val', val);
+            });
+        }
+
+        function selectMathAnswer(btnIdx) {
+            if (!isGameRunning) return;
+
+            const optButtons = document.querySelectorAll('.math-opt-btn');
+            const selectedVal = parseInt(optButtons[btnIdx].getAttribute('data-val'));
+
+            if (selectedVal === correctAnswer) {
+                playAppSound('click');
+                gameScore += 10;
+                document.getElementById('math-score').innerText = gameScore;
+                optButtons[btnIdx].classList.add('bg-emerald-500', 'text-white');
+                setTimeout(() => {
+                    generateMathEquation();
+                }, 300);
+            } else {
+                playAppSound('wrong');
+                optButtons[btnIdx].classList.add('bg-rose-500', 'text-white');
+                // Penalizare timp
+                gameTimeLeft = Math.max(0, gameTimeLeft - 3);
+                document.getElementById('math-timer').innerText = gameTimeLeft + 's';
+            }
+        }
+
+        function endMathGame() {
+            clearInterval(gameTimer);
+            isGameRunning = false;
+            playAppSound('alarm');
+            document.getElementById('math-game-status-label').innerText = "Jocul s-a terminat!";
+            document.getElementById('math-equation').innerText = `Scor Final: ${gameScore}`;
+            document.getElementById('btn-start-math').classList.remove('hidden');
+            document.getElementById('btn-start-math').innerHTML = `<i class="fa-solid fa-rotate-left"></i> Joacă din Nou`;
+
+            document.querySelectorAll('.math-opt-btn').forEach(btn => {
+                btn.disabled = true;
+                btn.classList.add('opacity-50', 'cursor-not-allowed');
+            });
+
+            if (gameScore > state.mathHighScore) {
+                state.mathHighScore = gameScore;
+                saveState();
+                showNotification("🎉 Record Nou Personal!");
+            } else {
+                showNotification(`Ai obținut ${gameScore} puncte! Excelent.`);
+            }
+
+            renderMathGameStats();
+            renderDashboard();
+        }
+
+        // --- STREAMING_CHUNK: MOTOR DE CĂUTARE GLOBALĂ UNIFICAT ---
+        function handleGlobalSearch() {
+            const query = document.getElementById('global-search').value.trim().toLowerCase();
+            const drawer = document.getElementById('search-results-drawer');
+            const content = document.getElementById('search-results-content');
+
+            if (!query) {
+                drawer.classList.add('hidden');
+                return;
+            }
+
+            drawer.classList.remove('hidden');
+            content.innerHTML = '';
+
+            let matches = [];
+
+            // 1. Căutare în Orar
+            state.schedule.forEach(item => {
+                if (item.subject.toLowerCase().includes(query) || item.teacher.toLowerCase().includes(query)) {
+                    matches.push({
+                        type: 'Orar',
+                        title: `${item.subject} (${item.day} la ${item.time})`,
+                        desc: `Profesor: ${item.teacher} | Sala: ${item.room}`,
+                        tab: 'schedule'
+                    });
+                }
+            });
+
+            // 2. Căutare în Teme
+            state.homeworks.forEach(item => {
+                if (item.title.toLowerCase().includes(query) || item.subject.toLowerCase().includes(query)) {
+                    matches.push({
+                        type: 'Temă de acasă',
+                        title: item.title,
+                        desc: `Materie: ${item.subject} | Limită: ${item.duedate} | Status: ${item.completed ? 'Finalizată' : 'Activă'}`,
+                        tab: 'homework'
+                    });
+                }
+            });
+
+            // 3. Căutare în Notițe
+            state.notes.forEach(item => {
+                if (item.title.toLowerCase().includes(query) || item.content.toLowerCase().includes(query) || item.subject.toLowerCase().includes(query)) {
+                    matches.push({
+                        type: 'Notiță digitală',
+                        title: item.title,
+                        desc: `Materie: ${item.subject} | Conținut: ${item.content.substring(0, 60)}...`,
+                        tab: 'notes'
+                    });
+                }
+            });
+
+            // 4. Căutare în Flashcards
+            state.flashcards.forEach((item, idx) => {
+                if (item.question.toLowerCase().includes(query) || item.answer.toLowerCase().includes(query)) {
+                    matches.push({
+                        type: 'Card Memorie',
+                        title: item.question,
+                        desc: `Răspuns: ${item.answer}`,
+                        tab: 'study',
+                        action: () => {
+                            switchStudySubTab('flashcards');
+                            state.activeFlashcardIdx = idx;
+                        }
+                    });
+                }
+            });
+
+            if (matches.length === 0) {
+                content.innerHTML = `<p class="text-xs custom-text-muted text-center py-4">Niciun rezultat găsit pentru "${query}".</p>`;
+                return;
+            }
+
+            matches.forEach(m => {
+                const itemEl = document.createElement('div');
+                itemEl.className = "p-2 rounded-lg bg-slate-100/50 dark:bg-slate-800/40 hover:bg-indigo-100 hover:dark:bg-slate-700 transition cursor-pointer text-left";
+                itemEl.onclick = () => {
+                    switchTab(m.tab);
+                    if (m.action) m.action();
+                    closeSearch();
+                };
+                itemEl.innerHTML = `
+                    <div class="flex justify-between items-center mb-0.5">
+                        <span class="text-[9px] font-bold uppercase text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-slate-900 px-1.5 py-0.5 rounded">${m.type}</span>
+                    </div>
+                    <h5 class="text-xs font-bold truncate">${m.title}</h5>
+                    <p class="text-[10px] custom-text-muted truncate mt-0.5">${m.desc}</p>
+                `;
+                content.appendChild(itemEl);
+            });
+        }
+
+        function closeSearch() {
+            document.getElementById('global-search').value = '';
+            document.getElementById('search-results-drawer').classList.add('hidden');
+        }
+
+        // --- STREAMING_CHUNK: PANOU DE CONTROL RENDERING (Dashboard core load) ---
+        function renderDashboard() {
+            // 1. Numărător teme active
+            const activeHws = state.homeworks.filter(h => !h.completed);
+            document.getElementById('dash-active-homeworks-count').innerText = `${activeHws.length} în curs`;
+            document.getElementById('dash-notes-count').innerText = `${state.notes.length} notițe`;
+            document.getElementById('dash-game-score').innerText = `${state.mathHighScore} puncte`;
+
+            // 2. Orarul zilei de astăzi
+            const todayName = new Date().toLocaleDateString('ro-RO', { weekday: 'long' });
+            // Mapare limbă română
+            const dayMap = {
+                "luni": "Luni", "marți": "Marți", "miercuri": "Miercuri", "joi": "Joi", "vineri": "Vineri",
+                "monday": "Luni", "tuesday": "Marți", "wednesday": "Miercuri", "thursday": "Joi", "friday": "Vineri"
+            };
+            const currentDayRo = dayMap[todayName.toLowerCase()] || 'Luni';
+
+            const todayScheduleContainer = document.getElementById('dashboard-today-schedule');
+            todayScheduleContainer.innerHTML = '';
+
+            const todayOre = state.schedule.filter(item => item.day === currentDayRo)
+                .sort((a, b) => a.time.localeCompare(b.time));
+
+            if (todayOre.length === 0) {
+                todayScheduleContainer.innerHTML = `
+                    <div class="text-center py-4 text-xs custom-text-muted">
+                        Nu ai nicio oră programată pentru astăzi (${currentDayRo}). Relaxare! 🎉
+                    </div>
+                `;
+            } else {
+                todayOre.forEach(ora => {
+                    const row = document.createElement('div');
+                    row.className = "flex items-center justify-between p-3 rounded-xl bg-slate-100/50 dark:bg-slate-900/40 border border-transparent hover:border-[var(--border-color)] transition";
+                    row.innerHTML = `
+                        <div class="flex items-center gap-3">
+                            <span class="text-xs font-bold custom-accent-text bg-white dark:bg-slate-800 px-2.5 py-1.5 rounded-lg shadow-sm border custom-border">${ora.time}</span>
+                            <div>
+                                <h4 class="text-xs sm:text-sm font-bold">${ora.subject}</h4>
+                                <span class="text-[10px] custom-text-muted"><i class="fa-solid fa-location-dot"></i> ${ora.room}</span>
+                            </div>
+                        </div>
+                        <span class="text-[10px] font-semibold custom-text-muted">${ora.teacher}</span>
+                    `;
+                    todayScheduleContainer.appendChild(row);
+                });
+            }
+
+            // 3. Teme Urgente
+            const urgentHwContainer = document.getElementById('dashboard-urgent-homeworks');
+            urgentHwContainer.innerHTML = '';
+
+            const urgentHws = activeHws
+                .sort((a, b) => {
+                    const priorityMap = { "Mare": 3, "Medie": 2, "Mică": 1 };
+                    return priorityMap[b.priority] - priorityMap[a.priority];
+                })
+                .slice(0, 3);
+
+            if (urgentHws.length === 0) {
+                urgentHwContainer.innerHTML = `
+                    <div class="text-center py-4 text-xs custom-text-muted">
+                        Nu ai nicio temă urgentă de făcut. Ești la zi! 🥳
+                    </div>
+                `;
+            } else {
+                urgentHws.forEach(hw => {
+                    const row = document.createElement('div');
+                    const isUrgent = hw.priority === 'Mare';
+                    row.className = "p-3 rounded-xl border custom-border flex items-center justify-between bg-slate-50/50 dark:bg-slate-900/40 hover:scale-[1.01] transition";
+                    row.innerHTML = `
+                        <div class="overflow-hidden pr-2">
+                            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wider ${isUrgent ? 'bg-amber-100 text-amber-800' : 'bg-blue-100 text-[#1E3A8A]'}">${hw.subject}</span>
+                            <h4 class="text-xs font-bold mt-1.5 truncate">${hw.title}</h4>
+                        </div>
+                        <button onclick="toggleHomeworkStatus('${hw.id}')" class="p-1.5 rounded-lg bg-indigo-50 dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 hover:scale-105 transition text-xs shrink-0 font-bold">
+                            Gata
+                        </button>
+                    `;
+                    urgentHwContainer.appendChild(row);
+                });
+            }
+        }
+
+        // --- EVENIMENTUL DE START INIȚIALIZARE ---
+        window.onload = function () {
+            // Aplicare temă stocată
+            const savedTheme = localStorage.getItem('eduhub_theme') || 'pastel';
+            changeTheme(savedTheme);
+
+            // Inițializări vizuale bază
+            initTimeAndClock();
+            runUnitConversion();
+            
+            // Render default Dashboard
+            renderDashboard();
+        };
+    </script>
 </body>
 </html>
